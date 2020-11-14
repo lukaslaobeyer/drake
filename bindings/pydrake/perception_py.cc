@@ -8,6 +8,7 @@
 #include "drake/bindings/pydrake/pydrake_pybind.h"
 #include "drake/perception/depth_image_to_point_cloud.h"
 #include "drake/perception/point_cloud.h"
+#include "drake/perception/point_cloud_to_lcm_pointcloud_t.h"
 
 namespace drake {
 namespace pydrake {
@@ -136,6 +137,23 @@ void init_perception(py::module m) {
             py_rvp::reference_internal, cls_doc.color_image_input_port.doc)
         .def("point_cloud_output_port", &Class::point_cloud_output_port,
             py_rvp::reference_internal, cls_doc.point_cloud_output_port.doc);
+  }
+
+  {
+    using Class = PointCloudToLcmPointcloudT;
+    constexpr auto& cls_doc = doc.PointCloudToLcmPointcloudT;
+    py::class_<Class, LeafSystem<double>> cls(
+        m, "PointCloudToLcmPointcloudT");
+    cls  // BR
+        .def(py::init<const Eigen::Isometry3d&>(), py::arg("camera_pose"),
+            cls_doc.ctor.doc_1args)
+        .def("camera_pose_input_port", &Class::camera_pose_input_port,
+            py_rvp::reference_internal, cls_doc.camera_pose_input_port.doc)
+        .def("point_cloud_input_port", &Class::point_cloud_input_port,
+            py_rvp::reference_internal, cls_doc.point_cloud_input_port.doc)
+        .def("pointcloud_t_msg_output_port",
+            &Class::pointcloud_t_msg_output_port, py_rvp::reference_internal,
+            cls_doc.pointcloud_t_msg_output_port.doc);
   }
 }
 

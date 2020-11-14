@@ -2,6 +2,7 @@
 
 #include "robotlocomotion/image_array_t.hpp"
 #include "robotlocomotion/quaternion_t.hpp"
+#include "bot_core/pointcloud_t.hpp"
 
 #include "drake/bindings/pydrake/systems/lcm_pybind.h"
 #include "drake/lcmt_contact_results_for_viz.hpp"
@@ -17,6 +18,7 @@ void BindCppSerializers() {
   BindCppSerializer<robotlocomotion::image_array_t>("robotlocomotion");
   BindCppSerializer<robotlocomotion::quaternion_t>("robotlocomotion");
   BindCppSerializer<drake::lcmt_contact_results_for_viz>("drake");
+  BindCppSerializer<bot_core::pointcloud_t>("bot_core");
 }
 
 }  // namespace pylcm

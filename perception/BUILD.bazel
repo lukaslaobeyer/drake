@@ -18,6 +18,7 @@ drake_cc_package_library(
         ":depth_image_to_point_cloud",
         ":point_cloud",
         ":point_cloud_flags",
+        ":point_cloud_to_lcm_pointcloud_t",
     ],
 )
 
@@ -80,6 +81,22 @@ drake_cc_googletest(
         ":point_cloud",
         "//common/test_utilities:eigen_matrix_compare",
         "//common/test_utilities:expect_no_throw",
+    ],
+)
+
+drake_cc_library(
+    name = "point_cloud_to_lcm_pointcloud_t",
+    srcs = [
+        "point_cloud_to_lcm_pointcloud_t.cc",
+    ],
+    hdrs = [
+        "point_cloud_to_lcm_pointcloud_t.h",
+    ],
+    deps = [
+        ":point_cloud",
+        "//common:essential",
+        "//systems/framework",
+        "@lcmtypes_bot2_core",
     ],
 )
 
